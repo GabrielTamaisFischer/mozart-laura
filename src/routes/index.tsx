@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Intro } from "@/components/Intro";
 import { AuroraBg } from "@/components/AuroraBg";
@@ -11,6 +11,7 @@ import { Gallery } from "@/components/Gallery";
 import { Videos } from "@/components/Videos";
 import { Timeline } from "@/components/Timeline";
 import { Section } from "@/components/Section";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,14 +28,27 @@ export const Route = createFileRoute("/")({
 function LoveSite() {
   const [entered, setEntered] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   const handleEnter = () => {
     setEntered(true);
     setPlaying(true);
+    // start the hero background video right away, muted so autoplay is allowed
+    const v = heroVideoRef.current;
+    if (v) {
+      v.muted = true;
+      v.play().catch(() => {});
+    }
     setTimeout(() => {
       document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
     }, 900);
   };
+
+  useEffect(() => {
+    if (entered && heroVideoRef.current) {
+      heroVideoRef.current.play().catch(() => {});
+    }
+  }, [entered]);
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -53,8 +67,20 @@ function LoveSite() {
         className="relative z-10"
       >
         {/* HERO */}
-        <section id="hero" className="relative flex min-h-screen items-center justify-center px-5 py-24 sm:px-8">
-          <div className="mx-auto max-w-4xl text-center">
+        <section id="hero" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 sm:px-8">
+          {/* Background video — autoplays muted as soon as user enters */}
+          <video
+            ref={heroVideoRef}
+            src={heroVideo.url}
+            playsInline
+            loop
+            muted
+            preload="auto"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
+          <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 0%, oklch(0.55 0.28 22 / 0.18) 40%, oklch(0.01 0.01 20 / 0.85) 80%)" }} />
+          <div className="relative z-10 mx-auto max-w-4xl text-center">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

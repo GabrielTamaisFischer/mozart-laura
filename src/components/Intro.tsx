@@ -7,11 +7,11 @@ export function Intro({ onEnter }: { onEnter: () => void }) {
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 1.2 }}
       className="fixed inset-0 z-[100] flex items-center justify-center px-6"
-      style={{ background: "radial-gradient(ellipse at center, oklch(0.18 0.1 20) 0%, oklch(0.04 0.02 20) 70%)" }}
+      style={{ background: "radial-gradient(ellipse at center, oklch(0.1 0.08 20) 0%, oklch(0.01 0.01 20) 70%)" }}
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="animate-aurora absolute left-1/2 top-1/2 h-[80vh] w-[80vh] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
-             style={{ background: "oklch(0.55 0.26 22 / 0.4)" }} />
+             style={{ background: "oklch(0.55 0.28 22 / 0.45)" }} />
       </div>
       <motion.div
         initial={{ y: 30, opacity: 0 }}
@@ -38,7 +38,6 @@ export function Intro({ onEnter }: { onEnter: () => void }) {
         >
           Entrar na nossa história ♥
         </motion.button>
-        <p className="mt-4 text-xs text-muted-foreground">Com música — em volume suave</p>
       </motion.div>
     </motion.div>
   );

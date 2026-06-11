@@ -1,9 +1,20 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
-// Floating heart particles in the background
-export function HeartParticles({ count = 18 }: { count?: number }) {
-  const hearts = useMemo(
-    () =>
+type Heart = {
+  id: number;
+  left: number;
+  delay: number;
+  duration: number;
+  size: number;
+  opacity: number;
+};
+
+// Floating heart particles — client-only to avoid SSR hydration mismatches.
+export function HeartParticles({ count = 22 }: { count?: number }) {
+  const [hearts, setHearts] = useState<Heart[]>([]);
+
+  useEffect(() => {
+    setHearts(
       Array.from({ length: count }).map((_, i) => ({
         id: i,
         left: Math.random() * 100,
@@ -12,8 +23,10 @@ export function HeartParticles({ count = 18 }: { count?: number }) {
         size: 8 + Math.random() * 18,
         opacity: 0.3 + Math.random() * 0.5,
       })),
-    [count]
-  );
+    );
+  }, [count]);
+
+  if (!hearts.length) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
