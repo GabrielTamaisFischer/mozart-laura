@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Intro } from "@/components/Intro";
 import { AuroraBg } from "@/components/AuroraBg";
@@ -11,6 +11,7 @@ import { Gallery } from "@/components/Gallery";
 import { Videos } from "@/components/Videos";
 import { Timeline } from "@/components/Timeline";
 import { Section } from "@/components/Section";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,14 +28,27 @@ export const Route = createFileRoute("/")({
 function LoveSite() {
   const [entered, setEntered] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   const handleEnter = () => {
     setEntered(true);
     setPlaying(true);
+    // start the hero background video right away, muted so autoplay is allowed
+    const v = heroVideoRef.current;
+    if (v) {
+      v.muted = true;
+      v.play().catch(() => {});
+    }
     setTimeout(() => {
       document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
     }, 900);
   };
+
+  useEffect(() => {
+    if (entered && heroVideoRef.current) {
+      heroVideoRef.current.play().catch(() => {});
+    }
+  }, [entered]);
 
   return (
     <div className="relative min-h-screen overflow-hidden">
