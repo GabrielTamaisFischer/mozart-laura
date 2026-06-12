@@ -18,13 +18,13 @@ export function Intro({ onEnter }: { onEnter: () => void }) {
         className="relative z-10 max-w-2xl text-center"
       >
         <p className="font-display text-sm uppercase tracking-[0.4em] text-[color:var(--gold)] text-gold-glow sm:text-base">
-          Para voce, Laura
+          Para você, Laura
         </p>
         <h1 className="mt-6 font-display text-6xl font-light leading-none text-[color:var(--ruby)] text-glow sm:text-8xl">
           Mozart & Laura
         </h1>
         <p className="mx-auto mt-8 max-w-lg text-pretty font-display text-lg italic leading-relaxed text-muted-foreground sm:text-xl">
-          Um pequeno mundo feito de musica, memoria e amor. Pronta para entrar?
+          Um pequeno mundo feito de música, memória e amor. Pronta para entrar?
         </p>
         <motion.button
           whileHover={{ scale: 1.04 }}
@@ -32,7 +32,7 @@ export function Intro({ onEnter }: { onEnter: () => void }) {
           onClick={onEnter}
           className="ring-glow mt-12 inline-flex items-center gap-3 rounded-full border border-[color:var(--ruby)]/55 bg-[color:var(--ruby)]/10 px-8 py-4 font-display text-lg tracking-wide text-foreground backdrop-blur-sm transition-colors hover:bg-[color:var(--ruby)]/25 sm:text-xl"
         >
-          Entrar na nossa historia
+          Entrar na nossa história
           <span className="text-[color:var(--ruby)]">♥</span>
         </motion.button>
       </motion.div>
