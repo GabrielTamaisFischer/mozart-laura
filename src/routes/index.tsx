@@ -65,7 +65,10 @@ function LoveSite() {
         transition={{ duration: 1.2, delay: 0.4 }}
         className="relative z-10"
       >
-        <section id="hero" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 sm:px-8">
+        <section
+          id="hero"
+          className="relative flex min-h-[118vh] items-center justify-center overflow-hidden px-5 pb-[34vh] pt-24 sm:min-h-[112vh] sm:px-8 sm:pb-[30vh]"
+        >
           <video
             ref={heroVideoRef}
             src={heroVideo.url}
@@ -74,11 +77,13 @@ function LoveSite() {
             muted
             autoPlay
             preload="auto"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[112%] w-full object-cover"
           />
-          <div className="pointer-events-none absolute inset-0 bg-[color:var(--background)]/70" />
+          <div className="pointer-events-none absolute inset-0 bg-[color:var(--background)]/66" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(0,0,0,0.86)_95%)]" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--background)] via-transparent to-[color:var(--background)]/60" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--background)]/90 via-transparent to-[color:var(--background)]/60" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58vh] bg-gradient-to-b from-transparent via-[color:var(--background)]/88 to-[color:var(--background)]" />
+          <div className="pointer-events-none absolute inset-x-0 -bottom-20 h-40 bg-[color:var(--background)] blur-3xl" />
 
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
             <motion.p
@@ -138,7 +143,7 @@ function LoveSite() {
           </div>
         </section>
 
-        <Section id="countdown" title="Estamos construindo nossa história há…">
+        <Section id="countdown" title="Estamos construindo nossa história há…" className="-mt-32 sm:-mt-44">
           <Countdown />
           <p className="mx-auto mt-12 max-w-xl text-pretty text-center font-display text-lg italic leading-relaxed text-muted-foreground">
             E mesmo contando cada segundo, ainda parece pouco perto de tudo que eu quero viver com
