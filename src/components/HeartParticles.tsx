@@ -9,19 +9,19 @@ type Heart = {
   opacity: number;
 };
 
-// Floating heart particles — client-only to avoid SSR hydration mismatches.
-export function HeartParticles({ count = 22 }: { count?: number }) {
+export function HeartParticles({ count = 18 }: { count?: number }) {
   const [hearts, setHearts] = useState<Heart[]>([]);
 
   useEffect(() => {
+    const total = window.innerWidth < 768 ? Math.min(10, count) : count;
     setHearts(
-      Array.from({ length: count }).map((_, i) => ({
+      Array.from({ length: total }).map((_, i) => ({
         id: i,
         left: Math.random() * 100,
-        delay: Math.random() * 15,
-        duration: 12 + Math.random() * 18,
-        size: 8 + Math.random() * 18,
-        opacity: 0.3 + Math.random() * 0.5,
+        delay: Math.random() * 18,
+        duration: 13 + Math.random() * 17,
+        size: 10 + Math.random() * 20,
+        opacity: 0.14 + Math.random() * 0.32,
       })),
     );
   }, [count]);
@@ -33,14 +33,14 @@ export function HeartParticles({ count = 22 }: { count?: number }) {
       {hearts.map((h) => (
         <span
           key={h.id}
-          className="animate-float-heart absolute bottom-0 text-[color:var(--ruby)]"
+          className="animate-float-heart absolute bottom-[-40px] text-[color:var(--ruby)]"
           style={{
             left: `${h.left}%`,
             animationDelay: `${h.delay}s`,
             animationDuration: `${h.duration}s`,
             fontSize: `${h.size}px`,
             opacity: h.opacity,
-            filter: "drop-shadow(0 0 8px oklch(0.62 0.24 25 / 0.8))",
+            filter: "drop-shadow(0 0 8px oklch(0.55 0.25 22 / 0.65))",
           }}
         >
           ♥
