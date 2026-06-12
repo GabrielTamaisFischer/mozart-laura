@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-// Start date: 18 January 2026
 const START = new Date("2026-01-18T00:00:00");
 
 function diff(now: Date) {
@@ -35,31 +34,35 @@ export function Countdown() {
     ["meses", t.months],
     ["dias", t.days],
     ["horas", t.hours],
-    ["min", t.minutes],
-    ["seg", t.seconds],
+    ["minutos", t.minutes],
+    ["segundos", t.seconds],
   ];
 
   const future = new Date() < START;
 
   return (
-    <div className="grid grid-cols-3 gap-3 sm:grid-cols-6 sm:gap-4">
-      {units.map(([label, value], i) => (
-        <motion.div
-          key={label}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.08 }}
-          className="glass border-glow flex flex-col items-center rounded-2xl px-2 py-4 sm:py-6"
-        >
-          <span className="font-display text-3xl font-bold text-glow tabular-nums text-[color:var(--gold)] sm:text-5xl">
-            {future ? 0 : Math.max(0, value)}
-          </span>
-          <span className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground sm:text-sm">
-            {label}
-          </span>
-        </motion.div>
-      ))}
+    <div className="mx-auto grid max-w-5xl grid-cols-3 gap-3 sm:gap-5 md:grid-cols-6">
+      {units.map(([label, value], i) => {
+        const display = future ? "00" : String(Math.max(0, value)).padStart(2, "0");
+        return (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.08 }}
+            className="glass ring-glow flex flex-col items-center rounded-2xl px-2 py-5 sm:py-7"
+            style={{ animation: `pulse-glow ${3 + i * 0.28}s ease-in-out infinite` }}
+          >
+            <span className="font-mono text-3xl font-semibold tabular-nums text-[color:var(--ruby)] text-glow sm:text-5xl">
+              {display}
+            </span>
+            <span className="mt-2 font-display text-[10px] uppercase tracking-[0.24em] text-muted-foreground sm:text-xs">
+              {label}
+            </span>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
