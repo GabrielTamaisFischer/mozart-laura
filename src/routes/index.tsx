@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Intro } from "@/components/Intro";
 import { AuroraBg } from "@/components/AuroraBg";
@@ -16,10 +16,10 @@ import heroVideo from "@/assets/hero-video.mp4.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mozart & Laura — Nossa História" },
-      { name: "description", content: "Um presente feito de música, memória e amor — de Mozart para Laura." },
-      { property: "og:title", content: "Mozart & Laura — Nossa História" },
-      { property: "og:description", content: "Um presente feito de música, memória e amor — de Mozart para Laura." },
+      { title: "Mozart & Laura - Nossa História" },
+      { name: "description", content: "Um presente feito de música, memória e amor - de Mozart para Laura." },
+      { property: "og:title", content: "Mozart & Laura - Nossa História" },
+      { property: "og:description", content: "Um presente feito de música, memória e amor - de Mozart para Laura." },
     ],
   }),
   component: LoveSite,
@@ -33,7 +33,6 @@ function LoveSite() {
   const handleEnter = () => {
     setEntered(true);
     setPlaying(true);
-    // start the hero background video right away, muted so autoplay is allowed
     const v = heroVideoRef.current;
     if (v) {
       v.muted = true;
@@ -51,7 +50,7 @@ function LoveSite() {
   }, [entered]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-[color:var(--background)]">
       <AuroraBg />
       <HeartParticles />
       <MouseGlow />
@@ -66,156 +65,127 @@ function LoveSite() {
         transition={{ duration: 1.2, delay: 0.4 }}
         className="relative z-10"
       >
-        {/* HERO */}
         <section id="hero" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 sm:px-8">
-          {/* Background video — autoplays muted as soon as user enters */}
           <video
             ref={heroVideoRef}
             src={heroVideo.url}
             playsInline
             loop
             muted
+            autoPlay
             preload="auto"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
-          <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 0%, oklch(0.55 0.28 22 / 0.18) 40%, oklch(0.01 0.01 20 / 0.85) 80%)" }} />
-          <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <div className="pointer-events-none absolute inset-0 bg-[color:var(--background)]/70" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(0,0,0,0.86)_95%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--background)] via-transparent to-[color:var(--background)]/60" />
+
+          <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="font-script text-3xl text-[color:var(--gold)] text-gold-glow sm:text-4xl"
+              transition={{ delay: 0.4, duration: 1 }}
+              className="mb-4 font-display text-sm uppercase tracking-[0.4em] text-[color:var(--gold)] text-gold-glow sm:text-base"
             >
-              Dia dos Namorados
+              Feliz Dia dos Namorados
             </motion.p>
+
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 1 }}
-              className="mt-4 font-display text-6xl font-bold leading-[0.95] text-glow sm:text-8xl md:text-9xl"
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.7, duration: 1.3, ease: "easeOut" }}
+              className="font-display text-6xl font-light leading-none text-[color:var(--ruby)] text-glow sm:text-8xl md:text-9xl"
             >
-              <span className="gradient-text">Mozart</span>
-              <br />
-              <span className="my-2 inline-block text-[color:var(--ruby)] text-glow">&</span>
-              <br />
-              <span className="gradient-text">Laura</span>
+              Mozart <span className="text-[color:var(--ruby)]">&</span> Laura
             </motion.h1>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-              className="mx-auto mt-8 max-w-2xl font-display text-lg italic text-foreground/90 sm:text-2xl"
+              transition={{ delay: 1.2, duration: 1 }}
+              className="mt-8 max-w-xl text-pretty font-display text-xl italic leading-relaxed text-foreground/90 sm:text-2xl"
             >
               Desde 18 de janeiro de 2026, o meu mundo ganhou outro sentido.
             </motion.p>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5 }}
-              className="mx-auto mt-6 max-w-2xl text-base text-foreground/75 sm:text-lg"
+              transition={{ delay: 1.5, duration: 1 }}
+              className="mt-6 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base"
             >
-              Laura, este site é só uma pequena tentativa de transformar em palavras, imagens e
-              música tudo aquilo que eu sinto por você. Cada memória nossa virou parte do meu lugar
-              favorito no mundo.
+              Laura, este site é só uma pequena tentativa de transformar em palavras, imagens e música
+              tudo aquilo que eu sinto por você. Cada memória nossa virou parte do meu lugar favorito
+              no mundo.
             </motion.p>
-            <motion.div
+
+            <motion.a
+              href="#countdown"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 2 }}
-              className="mt-12"
+              transition={{ delay: 2.2, duration: 1 }}
+              className="mt-16 flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
             >
-              <a
-                href="#countdown"
-                className="font-script text-2xl text-[color:var(--gold)] underline-offset-8 hover:underline"
+              <span className="font-display text-xs uppercase tracking-[0.3em]">Role para descobrir</span>
+              <motion.span
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.8, repeat: Number.POSITIVE_INFINITY }}
+                className="text-[color:var(--ruby)]"
               >
-                role para baixo ↓
-              </a>
-            </motion.div>
+                ↓
+              </motion.span>
+            </motion.a>
           </div>
         </section>
 
-        {/* COUNTDOWN */}
-        <Section
-          id="countdown"
-          eyebrow="nosso tempo"
-          title="Estamos construindo nossa história há…"
-        >
+        <Section id="countdown" title="Estamos construindo nossa história há…">
           <Countdown />
-          <p className="mx-auto mt-10 max-w-2xl text-center text-base italic text-foreground/80 sm:text-lg">
+          <p className="mx-auto mt-12 max-w-xl text-pretty text-center font-display text-lg italic leading-relaxed text-muted-foreground">
             E mesmo contando cada segundo, ainda parece pouco perto de tudo que eu quero viver com
             você.
           </p>
         </Section>
 
-        {/* YOU ARE MY WORLD */}
-        <Section eyebrow="para a minha Laura" title="Laura, você é meu mundo">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="glass border-glow mx-auto max-w-3xl rounded-3xl p-8 sm:p-12"
-          >
-            <p className="font-display text-lg leading-relaxed text-foreground/90 sm:text-xl">
-              Laura, às vezes eu fico pensando em como algumas pessoas chegam na nossa vida e mudam
-              completamente o caminho. Você chegou assim. Sem precisar forçar nada, sem precisar
-              explicar muito. De repente, tudo ficou mais bonito, mais leve e mais verdadeiro. Com
-              você, eu não me sinto perdido. Eu sinto que estou exatamente onde deveria estar.
-            </p>
-          </motion.div>
+        <Section eyebrow="Para a minha Laura" title="Laura, você é meu mundo">
+          <RomanticTextBlock>
+            Laura, às vezes eu fico pensando em como algumas pessoas chegam na nossa vida e mudam
+            completamente o caminho. Você chegou assim. Sem precisar forçar nada, sem precisar
+            explicar muito. De repente, tudo ficou mais bonito, mais leve e mais verdadeiro. Com
+            você, eu não me sinto perdido. Eu sinto que estou exatamente onde deveria estar.
+          </RomanticTextBlock>
         </Section>
 
-        {/* GALLERY */}
-        <Section eyebrow="nossa galeria" title="Cada foto, um pequeno para sempre">
+        <Section eyebrow="Nossa galeria" title="Cada foto, um pequeno para sempre">
           <Gallery />
         </Section>
 
-        {/* VIDEOS */}
-        <Section eyebrow="em movimento" title="Memórias que ainda se movem">
+        <Section eyebrow="Em movimento" title="Memórias que ainda se movem">
           <Videos />
         </Section>
 
-        {/* HOMETOWN GLORY */}
-        <Section eyebrow="hometown glory" title="As memórias mais bonitas do meu mundo">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="glass border-glow mx-auto max-w-3xl rounded-3xl p-8 sm:p-12"
-          >
-            <p className="font-display text-lg leading-relaxed text-foreground/90 sm:text-xl">
-              Algumas músicas falam sobre lugares, ruas, lembranças e pessoas que fazem parte da
-              nossa história. Mas quando eu penso em tudo isso, eu penso em você. Porque, no fim,
-              Laura, o meu lugar favorito não é uma cidade, uma rua ou uma paisagem. É qualquer
-              lugar onde você esteja.
-            </p>
-          </motion.div>
+        <Section eyebrow="Nosso lugar favorito" title="As memórias mais bonitas do meu mundo">
+          <RomanticTextBlock>
+            Algumas músicas falam sobre lugares, ruas, lembranças e pessoas que fazem parte da
+            nossa história. Mas quando eu penso em tudo isso, eu penso em você. Porque, no fim,
+            Laura, o meu lugar favorito não é uma cidade, uma rua ou uma paisagem. É qualquer lugar
+            onde você esteja.
+          </RomanticTextBlock>
         </Section>
 
-        {/* 2 MUCH */}
-        <Section eyebrow="2 much" title="Dois segundos longe de você já parecem demais">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="glass border-glow mx-auto max-w-3xl rounded-3xl p-8 sm:p-12"
-          >
-            <p className="font-display text-lg leading-relaxed text-foreground/90 sm:text-xl">
-              Eu poderia passar horas olhando para você e ainda achar que foi pouco. Poderia ouvir
-              seu nome mil vezes e ainda sentir como se fosse música. Com você, até o silêncio tem
-              sentido. E se a eternidade existisse só para nós dois, eu ainda acharia pouco para te
-              amar.
-            </p>
-          </motion.div>
+        <Section eyebrow="Tempo demais" title="Dois segundos longe de você já parecem demais">
+          <RomanticTextBlock>
+            Eu poderia passar horas olhando para você e ainda achar que foi pouco. Poderia ouvir
+            seu nome mil vezes e ainda sentir como se fosse música. Com você, até o silêncio tem
+            sentido. E se a eternidade existisse só para nós dois, eu ainda acharia pouco para te
+            amar.
+          </RomanticTextBlock>
         </Section>
 
-        {/* TIMELINE */}
-        <Section eyebrow="nossa linha do tempo" title="Capítulos da nossa história">
+        <Section eyebrow="Nossa linha do tempo" title="Capítulos da nossa história">
           <Timeline />
         </Section>
 
-        {/* LETTER */}
-        <Section eyebrow="uma carta" title="Laura, essa parte é só para você">
+        <Section eyebrow="Uma carta" title="Laura, essa parte é só para você">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -238,43 +208,77 @@ function LoveSite() {
           </motion.div>
         </Section>
 
-        {/* FINALE */}
-        <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-5 py-24 text-center">
-          <div className="pointer-events-none absolute inset-0">
-            <div
-              className="animate-aurora absolute left-1/2 top-1/2 h-[90vh] w-[90vh] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
-              style={{ background: "oklch(0.55 0.26 22 / 0.45)" }}
-            />
-          </div>
+        <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-5 py-24 text-center">
+          <div className="pointer-events-none absolute inset-0 bg-radial-ruby animate-pulse-glow" />
+
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9 }}
+            className="relative z-10 mb-8 text-6xl text-[color:var(--ruby)] text-glow"
+            animate={{ scale: [1, 1.06, 1] }}
+          >
+            ♥
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative z-10"
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="relative z-10 font-display text-5xl font-light leading-tight text-[color:var(--ruby)] text-glow sm:text-7xl md:text-8xl"
           >
-            <h2 className="font-display text-5xl font-bold leading-tight text-glow sm:text-8xl">
-              <span className="gradient-text">Eu te amo, Laura.</span>
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl font-display text-lg italic text-foreground/85 sm:text-2xl">
-              E essa história ainda está só começando.
-            </p>
-            <a
-              href="#hero"
-              className="ruby-glow animate-pulse-glow mt-12 inline-block rounded-full bg-gradient-to-r from-[color:var(--ruby)] via-[color:var(--neon)] to-[color:var(--ruby)] px-8 py-4 font-display text-lg font-semibold text-white sm:text-xl"
-            >
-              Voltar ao início ↑
-            </a>
-          </motion.div>
-        </section>
+            Eu te amo, Laura.
+          </motion.h2>
 
-        {/* FOOTER */}
-        <footer className="relative z-10 border-t border-[color:var(--ruby)]/20 py-10 text-center">
-          <p className="font-script text-2xl text-[color:var(--gold)]">Mozart & Laura</p>
-          <p className="mt-2 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            feito com amor · 2026
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.25 }}
+            className="relative z-10 mt-6 font-display text-xl italic text-muted-foreground sm:text-2xl"
+          >
+            E essa história ainda está só começando.
+          </motion.p>
+
+          <motion.a
+            href="#hero"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="ring-glow relative z-10 mt-12 inline-flex items-center gap-3 rounded-full border border-[color:var(--ruby)]/55 bg-[color:var(--ruby)]/10 px-8 py-4 font-display text-lg tracking-wide text-foreground backdrop-blur-sm transition-colors hover:bg-[color:var(--ruby)]/25"
+          >
+            Voltar ao início
+            <span className="text-[color:var(--ruby)]">↑</span>
+          </motion.a>
+
+          <p className="relative z-10 mt-20 font-display text-xs uppercase tracking-[0.3em] text-muted-foreground/60">
+            Mozart & Laura - 18.01.2026
           </p>
-        </footer>
+        </section>
       </motion.main>
     </div>
+  );
+}
+
+function RomanticTextBlock({ children }: { children: ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      className="mx-auto max-w-3xl text-center"
+    >
+      <div className="mx-auto max-w-2xl text-pretty font-display text-lg leading-relaxed text-muted-foreground sm:text-xl">
+        {children}
+      </div>
+      <div className="mx-auto mt-10 flex items-center justify-center gap-4">
+        <span className="h-px w-16 bg-gradient-to-r from-transparent to-[color:var(--ruby)]/60" />
+        <span className="text-[color:var(--ruby)] animate-pulse-glow">♥</span>
+        <span className="h-px w-16 bg-gradient-to-l from-transparent to-[color:var(--ruby)]/60" />
+      </div>
+    </motion.div>
   );
 }
