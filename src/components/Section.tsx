@@ -15,7 +15,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={`relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28 ${className}`}>
+    <section id={id} className={`relative mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 ${className}`}>
       {(eyebrow || title) && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -24,12 +24,12 @@ export function Section({
           className="mb-12 text-center"
         >
           {eyebrow && (
-            <p className="font-script text-2xl text-[color:var(--gold)] text-gold-glow sm:text-3xl">
+            <p className="font-display text-sm uppercase tracking-[0.35em] text-[color:var(--gold)] text-gold-glow sm:text-base">
               {eyebrow}
             </p>
           )}
           {title && (
-            <h2 className="mt-3 font-display text-3xl font-bold leading-tight text-glow sm:text-5xl">
+            <h2 className="mx-auto mt-4 max-w-4xl text-balance font-display text-4xl font-light leading-tight text-foreground text-glow sm:text-5xl md:text-6xl">
               {title}
             </h2>
           )}
