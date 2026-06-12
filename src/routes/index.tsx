@@ -81,9 +81,9 @@ function LoveSite() {
           />
           <div className="pointer-events-none absolute inset-0 bg-[color:var(--background)]/66" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(0,0,0,0.86)_95%)]" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--background)]/90 via-transparent to-[color:var(--background)]/60" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58vh] bg-gradient-to-b from-transparent via-[color:var(--background)]/88 to-[color:var(--background)]" />
-          <div className="pointer-events-none absolute inset-x-0 -bottom-20 h-40 bg-[color:var(--background)] blur-3xl" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-[color:var(--background)]/60" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-[-16vh] h-[78vh] bg-[radial-gradient(ellipse_at_bottom,oklch(0.34_0.18_20_/_0.62)_0%,oklch(0.2_0.09_20_/_0.48)_36%,transparent_76%)] blur-[14px]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[62vh] bg-[linear-gradient(to_bottom,transparent_0%,oklch(0.04_0.012_25_/_0.72)_28%,oklch(0.13_0.06_22_/_0.72)_62%,oklch(0.22_0.1_20_/_0.26)_100%)]" />
 
           <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
             <motion.p
@@ -143,7 +143,12 @@ function LoveSite() {
           </div>
         </section>
 
-        <Section id="countdown" title="Estamos construindo nossa história há…" className="-mt-32 sm:-mt-44">
+        <div aria-hidden="true" className="pointer-events-none relative z-[2] -mt-[48vh] h-[58vh] overflow-hidden">
+          <div className="absolute left-1/2 top-[-12vh] h-[72vh] w-[120vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,oklch(0.32_0.18_20_/_0.58)_0%,oklch(0.14_0.06_22_/_0.42)_42%,transparent_74%)] blur-3xl" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,oklch(0.04_0.012_25_/_0.55)_24%,oklch(0.18_0.08_20_/_0.58)_64%,transparent_100%)]" />
+        </div>
+
+        <Section id="countdown" title="Estamos construindo nossa história há…" className="relative z-[3] -mt-[36vh] sm:-mt-[40vh]">
           <Countdown />
           <p className="mx-auto mt-12 max-w-xl text-pretty text-center font-display text-lg italic leading-relaxed text-muted-foreground">
             E mesmo contando cada segundo, ainda parece pouco perto de tudo que eu quero viver com
