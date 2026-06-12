@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-// Desktop-only mouse glow effect
 export function MouseGlow() {
-  const [pos, setPos] = useState({ x: -200, y: -200 });
+  const [pos, setPos] = useState({ x: -260, y: -260 });
   const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
@@ -19,12 +18,11 @@ export function MouseGlow() {
 
   return (
     <div
-      className="pointer-events-none fixed z-[1] h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full transition-transform duration-200 ease-out"
+      className="pointer-events-none fixed z-[1] hidden h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[75px] transition-transform duration-200 ease-out md:block"
       style={{
         left: pos.x,
         top: pos.y,
-        background:
-          "radial-gradient(circle, oklch(0.62 0.24 25 / 0.18) 0%, transparent 60%)",
+        background: "radial-gradient(circle, oklch(0.55 0.25 22 / 0.16) 0%, transparent 64%)",
       }}
     />
   );
